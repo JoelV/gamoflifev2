@@ -26,26 +26,31 @@ module.exports = function() {
   var combine = function(x,y) {
     return _.partial(isAlive, x, y, board);
   };
-  var random = function(x) {
-    return Math.Math.random() + .5;
+  //initializes array with false
+  var init = function(x ,y) { 
+    var b = _.times(x, function(){
+      return _.times(y, function() {
+        return false;
+      });
+    });
+    return b;  
+  };
+  var setAlive = function(b) {
+    _.each(b, function(row, i) {
+      _.each(row, function(val, j) {
+        b[i][j] = _.random(1) === 1 ? true : false;
+      });
+    });
   };
   return {
     seed: function(x,y) {
-      var b = [[]];
+      var b = init(x,y);
+      setAlive(b);
+      console.log(b);
+      return b;  
+    },
+    tick: function(b) {
 
-      var numAlive = random(x*y);
-      /*
-      while(numAlive !== 0) {
-        _.each(b, function(row, i) {
-          _.each(row[i], function(val){
-            var r = random(1);
-          }); 
-        });
-        numAlive--;
-      }
-      */
-      console.log(numAlive);
-      return numAlive;  
     },
     getNeighbors: function(x,y,b) {
       length = b[0].length;
