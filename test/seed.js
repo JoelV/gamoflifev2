@@ -1,5 +1,6 @@
 var app = require('../')();
 var expect = require('expect.js');
+var x, y;
 
 describe('app#seed', function() {
   before(function() {

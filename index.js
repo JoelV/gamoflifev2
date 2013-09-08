@@ -35,7 +35,7 @@ module.exports = function() {
     });
     return b;  
   };
-  var setAlive = function(b) {
+  var create = function(b) {
     _.each(b, function(row, i) {
       _.each(row, function(val, j) {
         b[i][j] = _.random(1) === 1 ? true : false;
@@ -45,12 +45,18 @@ module.exports = function() {
   return {
     seed: function(x,y) {
       var b = init(x,y);
-      setAlive(b);
-      console.log(b);
+      create(b);
+      //console.log(b);
       return b;  
     },
     tick: function(b) {
-
+     var next = _.map(b, function(row,i) {
+        return _.map(row, function(val,j) {
+          
+        });
+      }); 
+      console.log(next);
+      return next;
     },
     getNeighbors: function(x,y,b) {
       length = b[0].length;
@@ -81,5 +87,5 @@ module.exports = function() {
       var alive = _.without(neighbors, false);      
       return alive.length;   
     }
-  }
-}
+  };
+};
