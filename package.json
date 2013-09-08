@@ -1,0 +1,16 @@
+{
+  "name": "gol2",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "BSD-2-Clause",
+  "dependencies": {
+    "mocha": "~1.12.1",
+    "expect.js": "~0.2.0",
+    "underscore": "~1.5.1"
+  }
+}
