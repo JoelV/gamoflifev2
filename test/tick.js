@@ -5,12 +5,13 @@ var board;
 describe('app#tick', function() {
   before(function() {
     board = [
-      [true, false, true, false],
-      [false, true, false, false],
-      [true, true, false, true]
+      [false, false, false],
+      [true, true, true],
+      [false, false, false]
     ];
   });
   it('should be an array', function() {
-    expect(app.tick(board)).to.be.an('array');
+    console.log(app.tick(board));
+    //expect(app.tick(board)).to.be.an('array');
   });   
 });

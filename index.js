@@ -42,6 +42,43 @@ module.exports = function() {
       });
     });
   };
+  var getNeighbors = function(x,y,b) {
+    length = b[0].length;
+    width = b.length;
+    board = b;
+
+    var topLeft = combine(top(x), left(y));
+    var topMiddle = combine(top(x), middle(y));
+    var topRight = combine(top(x), right(y));
+    var centerLeft = combine(center(x), left(y));
+    var centerRight = combine(center(x), right(y));
+    var bottomLeft = combine(bottom(x), left(y));
+    var bottomMiddle = combine(bottom(x), middle(y));
+    var bottomRight = combine(bottom(x), right(y));
+
+    var neighbors = [
+      topLeft(),
+      topMiddle(),
+      topRight(),
+      centerLeft(),
+      centerRight(),
+      bottomLeft(),
+      bottomMiddle(),
+      bottomRight()
+    ];
+
+    //console.log(neighbors);
+    var alive = _.without(neighbors, false);      
+    return alive.length;   
+  };
+  var calculateLife = function(alive,x,y,b) {
+    if(alive) {
+      return (getNeighbors(x,y,b) < 2 || getNeighbors(x,y,b) > 3) ? false : true; 
+    } 
+    else {
+      return getNeighbors(x,y,b) === 3 ? true : false;
+    }  
+  };
   return {
     seed: function(x,y) {
       var b = init(x,y);
@@ -50,42 +87,13 @@ module.exports = function() {
       return b;  
     },
     tick: function(b) {
-     var next = _.map(b, function(row,i) {
-        return _.map(row, function(val,j) {
-          
+     return _.map(b, function(row,x) {
+        return _.map(row, function(alive,y) {
+          return calculateLife(alive,x,y,b);  
         });
       }); 
-      console.log(next);
-      return next;
+      //console.log(next);
+      //return next;
     },
-    getNeighbors: function(x,y,b) {
-      length = b[0].length;
-      width = b.length;
-      board = b;
-
-      var topLeft = combine(top(x), left(y));
-      var topMiddle = combine(top(x), middle(y));
-      var topRight = combine(top(x), right(y));
-      var centerLeft = combine(center(x), left(y));
-      var centerRight = combine(center(x), right(y));
-      var bottomLeft = combine(bottom(x), left(y));
-      var bottomMiddle = combine(bottom(x), middle(y));
-      var bottomRight = combine(bottom(x), right(y));
-
-      var neighbors = [
-        topLeft(),
-        topMiddle(),
-        topRight(),
-        centerLeft(),
-        centerRight(),
-        bottomLeft(),
-        bottomMiddle(),
-        bottomRight()
-      ];
-
-      //console.log(neighbors);
-      var alive = _.without(neighbors, false);      
-      return alive.length;   
-    }
   };
 };
